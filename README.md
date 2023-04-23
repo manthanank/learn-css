@@ -1,5 +1,7 @@
 # Learn CSS
 
+![npm](https://img.shields.io/npm/dw/learn-css)
+
 **CSS** - Stands for Cascading Style Sheets
 
 CSS describes how HTML elements are to be displayed on screen, paper, or in other media
