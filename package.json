@@ -1,6 +1,6 @@
 {
   "name": "learn-css",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Enterprise-grade Modern CSS (Cascading Style Sheets) Curriculum, Interactive Showcase & Specification Reference",
   "main": "dist/server.js",
   "type": "module",
