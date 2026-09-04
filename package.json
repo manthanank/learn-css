@@ -1,23 +1,43 @@
 {
   "name": "learn-css",
-  "version": "1.0.1",
-  "description": "",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Enterprise-grade Modern CSS (Cascading Style Sheets) Curriculum, Interactive Showcase & Specification Reference",
+  "main": "dist/server.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/manthanank/learn-css.git"
   },
   "keywords": [
-    "css"
+    "css",
+    "css3",
+    "flexbox",
+    "css-grid",
+    "container-queries",
+    "cascade-layers",
+    "oklch",
+    "web-development"
   ],
   "author": "Manthan Ank",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/manthanank/learn-css/issues"
   },
-  "homepage": "https://github.com/manthanank/learn-css#readme"
+  "homepage": "https://github.com/manthanank/learn-css#readme",
+  "dependencies": {
+    "express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
 }

@@ -1,0 +1,259 @@
+@layer reset, base, layout, components, utilities;
+
+@layer reset {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  input, button, textarea, select {
+    font: inherit;
+  }
+}
+
+@layer base {
+  :root {
+    --color-bg: oklch(0.14 0.03 260);
+    --color-surface: oklch(0.18 0.04 260);
+    --color-surface-hover: oklch(0.24 0.05 260);
+    --color-border: oklch(0.28 0.06 260);
+    --color-text-primary: oklch(0.96 0.01 260);
+    --color-text-secondary: oklch(0.72 0.03 260);
+    --color-primary: oklch(0.65 0.22 260);
+    --color-primary-hover: oklch(0.72 0.24 260);
+    --color-accent: oklch(0.75 0.18 150);
+    --color-accent-amber: oklch(0.78 0.16 75);
+    
+    --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+    
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    
+    --shadow-soft: 0 10px 30px -10px oklch(0 0 0 / 0.5);
+    --shadow-glow: 0 0 25px oklch(0.65 0.22 260 / 0.35);
+  }
+
+  [data-theme="light"] {
+    --color-bg: oklch(0.97 0.01 260);
+    --color-surface: oklch(1 0 0);
+    --color-surface-hover: oklch(0.94 0.02 260);
+    --color-border: oklch(0.88 0.03 260);
+    --color-text-primary: oklch(0.18 0.04 260);
+    --color-text-secondary: oklch(0.42 0.04 260);
+    --color-primary: oklch(0.55 0.22 260);
+    --color-shadow: oklch(0.1 0.02 260 / 0.1);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer layout {
+  .app-container {
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: clamp(1rem, 3vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .header-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .grid-showcase {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@layer components {
+  .card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    container-type: inline-size;
+    container-name: card-container;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-glow);
+    }
+
+    /* Modern relational pseudo-class :has() */
+    &:has(.featured-badge) {
+      border-color: var(--color-accent);
+      background: linear-gradient(135deg, var(--color-surface) 0%, oklch(0.22 0.06 150 / 0.3) 100%);
+    }
+
+    h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.25rem;
+      color: var(--color-text-primary);
+    }
+
+    p {
+      color: var(--color-text-secondary);
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Container Query: adapts based on card width, not screen width */
+  @container card-container (min-width: 400px) {
+    .card-content {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    &.btn-primary {
+      background-color: var(--color-primary);
+      color: #ffffff;
+
+      &:hover {
+        background-color: var(--color-primary-hover);
+      }
+    }
+
+    &.btn-secondary {
+      background-color: var(--color-surface-hover);
+      color: var(--color-text-primary);
+      border: 1px solid var(--color-border);
+    }
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 9999px;
+    background-color: var(--color-surface-hover);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+  }
+
+  /* Specificity Calculator Form */
+  .calculator-card {
+    grid-column: 1 / -1;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+  }
+
+  .input-group {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+
+    input {
+      flex: 1 1 300px;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--color-border);
+      background-color: var(--color-bg);
+      color: var(--color-text-primary);
+      font-family: var(--font-mono);
+
+      &:focus {
+        outline: none;
+        border-color: var(--color-primary);
+      }
+    }
+  }
+
+  .result-display {
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    font-family: var(--font-mono);
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    .metric {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      .label {
+        font-size: 0.8rem;
+        color: var(--color-text-secondary);
+        text-transform: uppercase;
+      }
+      .value {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--color-primary);
+      }
+    }
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

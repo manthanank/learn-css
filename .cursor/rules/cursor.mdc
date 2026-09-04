@@ -1,0 +1,11 @@
+---
+description: Learn CSS Guidelines and Coding Conventions
+globs: **/*.{css,html,ts,json}
+---
+
+# Cursor Rules for learn-css
+
+- Use Modern CSS features (Cascade Layers, Grid, Flexbox, Container Queries, OKLCH).
+- Do not use preprocessors (Sass/LESS) or utility frameworks (Tailwind) unless explicitly requested; use vanilla modern CSS.
+- Ensure all tests pass with `npm test` (`vitest run`).
+- Write clean TypeScript with strict type checking.
